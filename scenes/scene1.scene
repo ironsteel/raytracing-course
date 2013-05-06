@@ -22,6 +22,13 @@ sphere1.shader = shader1
 #добавяме сферата в сцената
 scene.addPrimitive(sphere1)
 
+# Plane
+plane = Plane()
+plane.point = Vector3(0, 2, 2)
+plane.normal = Vector3(1, 1, 0.2)
+plane.shader = shader2
+scene.addPrimitive(plane);
+
 #създаваме триъгълник
 triangle1 = Triangle()
 triangle1.v[0] = Vector3(0, 0, -3)
