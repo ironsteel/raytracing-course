@@ -48,6 +48,9 @@ namespace RayTracer.Primitives
 			hitData.hasIntersection = true;
 			hitData.hitPos = ray.p + (hitData.hitT * ray.dir);
 			hitData.hitPrimitive = this;
+			hitData.hitNormal = (hitData.hitPos - center);
+			hitData.hitNormal.normalize();
+
 			return true;
 		}
 		
