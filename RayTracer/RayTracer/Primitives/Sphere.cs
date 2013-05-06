@@ -31,6 +31,23 @@ namespace RayTracer.Primitives
 		
 		public override bool intersect( Ray ray, IntersectionData hitData ) 
         {
+			double a = ray.dir * ray.dir;
+			double b = 2 * (ray.dir * ray.p);
+			double c = (ray.p * ray.p) - (radius * radius);
+			
+			double discriminant = b * b - 4 * a * c;
+			if (discriminant < 0)
+				return false;
+			
+			discriminant = System.Math.Sqrt (discriminant);
+			
+			double t1 = (-b - discriminant) / (2 * a);
+			double t2 = (-b + discriminant) / (2 * a);
+			
+			hitData.hitT = System.Math.Min(t1, t2);
+			hitData.hasIntersection = true;
+			hitData.hitPos = ray.p + (hitData.hitT * ray.dir);
+			hitData.hitPrimitive = this;
 			return true;
 		}
 		
