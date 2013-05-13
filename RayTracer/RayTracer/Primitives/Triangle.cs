@@ -76,7 +76,27 @@ namespace RayTracer.Primitives
 		
 		public override bool intersect( Ray ray, IntersectionData hitData ) 
 		{
-            return false;
+			Vector3 e1, e2;
+			e1 = v[1] - v[0];// e1 = edge v0 to v1
+			e2 = v[2] - v[0];// e2 = edge v0 to v2
+			Vector3 pvec = ray.dir ^ e2;// pvec = cross(dir,e2)
+			double det = e1 * pvec;// determinant = dot(e1,pvec)
+			if (det < 1e-6f && det > -1e-6f) return false; // if det close to zero -> ray lies in the plane
+			double inv_det = 1.0f / det;// inverse determinant
+			Vector3 tvec = ray.p - v[0];// distance v0 to ray origin
+			double u = inv_det * (tvec * pvec);// u = dot(tvec,pvec) / det
+			if (u < -1e-6f || u > (1.0f + 1e-6f)) return false;// if u outside triangle return
+			Vector3 qvec = tvec ^ e1;// qvec = cross(tvec,e1)
+			double t = inv_det * (e2 * qvec);// t = dot(e2,qvec) / det
+			if (t < ray.mint || t > ray.maxt) return false;// return false if t is outside range
+			double uvV = inv_det * (ray.dir * qvec);// v = dot(dir,qvec) / det
+			if (uvV < -1e-6f || (u + uvV) > (1.0f + 1e-6f)) return false;// if v outside triangle return
+			hitData.hitT = t;
+			hitData.hitNormal = e1 ^ e2;
+			hitData.hitNormal.normalize();
+			hitData.textureUVW = ((1 - u - uvV) * tc[0]) + (u * tc[1]) + (uvV * tc[2]);
+			hitData.shaderID = shaderID;
+			return true;
 		}
 		
 	}
