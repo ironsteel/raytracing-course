@@ -13,21 +13,26 @@ shader1.color = Color3(1, 0, 0)
 shader2 = ConstantShader()
 shader2.color = Color3(0, 1, 0)
 
-#създаваме сфера
-sphere1 = Sphere()
-sphere1.center = Vector3(0, 0, 0)
-sphere1.radius = 2
-#прилагаме материал shader1 върху сферата
-sphere1.shader = shader1
-#добавяме сферата в сцената
-scene.addPrimitive(sphere1)
 
 # Plane
 plane = Plane()
 plane.point = Vector3(0, 2, 2)
 plane.normal = Vector3(1, 1, 0.2)
 plane.shader = shader2
-scene.addPrimitive(plane);
+scene.addPrimitive(plane)
+
+torus = Torus()
+torus.innerRadius = 1
+torus.outerRadius = 4
+torus.shader = shader2
+scene.addPrimitive(torus)
+
+#създаваме сфера
+sphere1 = Sphere()
+sphere1.center = Vector3(0, 3, 0)
+sphere1.radius = 2
+sphere1.shader = shader1
+scene.addPrimitive(sphere1)
 
 #създаваме триъгълник
 triangle1 = Triangle()
