@@ -22,7 +22,7 @@ namespace RayTracer.Primitives
 		public override bool intersect (Ray ray, IntersectionData hitData)
 		{
 			double denom = ray.dir * normal;
-			if (denom < 0.000001)
+			if (MathUtils.IsZero(denom))
 				return false;
 
 			double nom = (point - ray.p) * normal;
