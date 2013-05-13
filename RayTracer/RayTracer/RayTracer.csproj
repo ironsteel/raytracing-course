@@ -184,6 +184,7 @@
     <Compile Include="Primitives\Plane.cs" />
     <Compile Include="Primitives\Torus.cs" />
     <Compile Include="Math\QuarticSolver.cs" />
+    <Compile Include="Shaders\TextureShader.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
