@@ -32,8 +32,27 @@ namespace RayTracer.Lights
 
         public override LightSample getSample(RayContext rayContext, double ru, double rv)
         {
-            return null;
-		}
+            //намираме векрор между двете точки
+            Vector3 dir = pos - rayContext.hitData.hitPos;
+            //определяме каква част от сферата (пространствен ъгъл) покрива точката
+            double solidAngle = (1.0 / (4.0 * System.Math.PI * dir.getLenghtSqr()));
+            //максимална дистанция за търсене на пресичания
+            double maxt = dir.getLenght(); dir.normalize();
+            //ако светлината се намира под повърхността от която е точката,
+            //няма смисъл да пресмятаме нищо
+            if (dir * (rayContext.hitData.hitNormal) <= 0)
+                return null;
+            //създаваме "сонда за сянка" и попълваме
+            LightSample sample = new LightSample();
+            sample.shadowRay = new Ray();
+            sample.shadowRay.p.set(rayContext.hitData.hitPos);
+            sample.shadowRay.dir.set(dir);
+            sample.shadowRay.maxt = maxt;
+            //задаваме енергията (изпратена през пространствения ъгъл)
+            sample.color = color * (power * solidAngle);
+            return sample;
+        }
+
 		
 		
 	}

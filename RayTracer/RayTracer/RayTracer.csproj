@@ -185,6 +185,7 @@
     <Compile Include="Primitives\Torus.cs" />
     <Compile Include="Math\QuarticSolver.cs" />
     <Compile Include="Shaders\TextureShader.cs" />
+    <Compile Include="Shaders\BRDFShader.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
