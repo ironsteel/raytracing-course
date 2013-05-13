@@ -48,11 +48,17 @@ namespace RayTracer.Primitives
 			
 			hitData.hitT = System.Math.Min(t1, t2);
 			hitData.hasIntersection = true;
-			hitData.hitPos = ray.p + (hitData.hitT * ray.dir);
+			Vector3 hitPoint = ray.p + (hitData.hitT * ray.dir);
+			hitData.hitPos = hitPoint;
 			hitData.hitPrimitive = this;
 			hitData.hitNormal = (hitData.hitPos - center);
 			hitData.hitNormal.normalize();
 
+			double u = (System.Math.PI + System.Math.Atan2(hitPoint.z - center.z, hitPoint.x - center.x)) / (System.Math.PI * 2);
+			double v = 1.0 - ((System.Math.PI / 2) + System.Math.Asin((hitPoint.y - center.y) / radius)) / System.Math.PI;
+			
+			hitData.textureUVW = new Vector3(u, v, 0);
+			
 			return true;
 		}
 		
