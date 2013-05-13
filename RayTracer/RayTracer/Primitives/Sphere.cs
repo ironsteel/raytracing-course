@@ -31,10 +31,12 @@ namespace RayTracer.Primitives
 		
 		public override bool intersect( Ray ray, IntersectionData hitData ) 
         {
+			ray.p = ray.p - center;
 			double a = ray.dir * ray.dir;
 			double b = 2 * (ray.dir * ray.p);
 			double c = (ray.p * ray.p) - (radius * radius);
-			
+			ray.p = ray.p + center;
+
 			double discriminant = b * b - 4 * a * c;
 			if (discriminant < 0)
 				return false;
