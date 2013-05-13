@@ -11,6 +11,10 @@ using System.Text;
 namespace RayTracer.Math {
 	
 	public class MathUtils {
+
+		/* epsilon surrounding for near zero values */
+		const double EQN_EPS = 1e-16f;
+
 		
 		public static double frac(double x) 
 		{
@@ -42,6 +46,12 @@ namespace RayTracer.Math {
 			pdf = (n + 1.0f) * System.Math.Pow(u, n / (n + 1.0f));
 			return new Vector3(System.Math.Cos(phi) * thetaCos, System.Math.Sin(phi) * thetaCos, thetaSin);
 		}
+
+		public static  bool IsZero( double x )
+        {
+                return ((x) > -EQN_EPS && (x) < EQN_EPS);
+        }
+
 
 	}
 
