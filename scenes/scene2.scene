@@ -12,7 +12,7 @@ shader1 = ConstantShader()
 shader1.color = Color3(1, 0, 0)
 
 texture1 = TextureImage()
-texture1.loadImage(basePath+"\\debug.jpg")
+texture1.loadImage(basePath+"/debug.jpg")
 
 #създаваме зелен материал
 shader2 = TextureShader()
