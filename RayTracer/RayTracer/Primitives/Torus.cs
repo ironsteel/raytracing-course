@@ -69,7 +69,7 @@ namespace RayTracer.Primitives
 			double temp = point * point - innerRadius * innerRadius - outerRadius * outerRadius;
 			double x = 4 * point.x * temp;
 			double y = 4 * point.y * temp;
-			double z = 4 * point.z * temp + 8 * outerRadius * outerRadius * point.x;
+			double z = 4 * point.z * temp + 8 * outerRadius * outerRadius * point.z;
 			return new Vector3 (x, y, z);
 		}
 
